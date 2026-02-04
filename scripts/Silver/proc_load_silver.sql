@@ -45,7 +45,7 @@ FROM
 (SELECT *,
 ROW_NUMBER() OVER (PARTITION BY cst_id ORDER BY cst_create_date DESC) AS flag_last
 FROM Bronze.crm_cust_info) T
-WHERE flag_last = 1;
+WHERE flag_last = 1  AND cst_id is not null;
 
 
 TRUNCATE TABLE silver.crm_prd_info;
